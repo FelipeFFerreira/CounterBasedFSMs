@@ -1,0 +1,55 @@
+# Pastas geradas automaticamente
+*.data/
+*.sim/
+*.xpr/
+*.ip_user_files/
+*.hw/
+*.cache/
+*.runs/
+*.gen/
+
+# Arquivos de log e temporários
+*.log
+*.jou
+*.backup
+*.wcfg
+*.str
+
+# Arquivos de checkpoint
+*.rpx
+*.xsa
+*.xdc
+
+# Pastas de saída
+*/output/
+*/build/
+
+# Arquivos de exportação de hardware
+*.sysdef
+
+# Arquivos temporários específicos de projetos
+*.tmp
+*.crp
+*.drc
+*.bxml
+
+# Pastas e arquivos do SDK/Hardware Manager
+.sdk/
+*.elf
+*.bit
+*.bin
+*.ltx
+*.bif
+*.hdf
+*.xsa
+
+# Arquivos de relatório
+*.rpt
+*.log
+*.html
+
+# Outros arquivos gerados automaticamente
+*.wdb
+*.xml
+*.tcl
+*.lock
