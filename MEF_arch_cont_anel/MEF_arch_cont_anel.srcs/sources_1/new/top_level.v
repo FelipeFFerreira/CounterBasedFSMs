@@ -1,3 +1,23 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Company: ITA
+// Engineer: Felipe Ferreira Nascimento
+// 
+// Create Date: 11/27/2024 06:45:32 PM
+// Design Name: 
+// Module Name: top_level
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments: cl
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
 module top_level (
     input wire clk,           // Clock principal
     input wire reset,         // Sinal de reset
@@ -15,7 +35,7 @@ module top_level (
     wire [9:1] Q_ring;        // Saída do contador em anel
     wire [4:1] C_decoder;     // Saída do decodificador
     wire [1:0] E;             // Saída da FSM
-    wire clear;               // Controle do clear
+    wire clear;               // Controle do clear do contador
     wire clk_out;             // Clock condicionado para o contador
 
     // Instanciar o contador em anel
@@ -53,8 +73,10 @@ module top_level (
     // Instanciar o módulo de controle de clock
     clock_gating_control uut_clock_control (
         .clk(clk),
+        .reset(reset),
         .Q(C_decoder),
         .E(E),
+        .CL(clear),
         .clk_out(clk_out)
     );
 

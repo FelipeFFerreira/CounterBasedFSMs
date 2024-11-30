@@ -30,6 +30,8 @@ module tb_fsm_with_clock_control;
     wire [1:0] E;            // Saída da FSM
     wire clear;              // Controle do clear
     wire clk_out;            // Clock condicionado para o contador
+    wire DOUT, DA, WE, WC, C0, C1; // Saídas do decodificador de saída
+
 
     // Instanciar o contador em anel
     ring_counter uut_ring_counter (
@@ -70,6 +72,18 @@ module tb_fsm_with_clock_control;
         .E(E),
         .CL(clear),
         .clk_out(clk_out)
+    );
+    
+    // Instanciar o módulo de saída
+    output_decoder uut_output_decoder (
+        .Q(C_decoder),
+        .E(E),
+        .DOUT(DOUT),
+        .DA(DA),
+        .WE(WE),
+        .WC(WC),
+        .C0(C0),
+        .C1(C1)
     );
 
     // Gera o clock

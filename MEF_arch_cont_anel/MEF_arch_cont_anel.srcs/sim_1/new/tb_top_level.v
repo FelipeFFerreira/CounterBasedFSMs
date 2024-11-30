@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: ITA
+// Engineer: Felipe Ferreira Nascimento
 // 
 // Create Date: 11/29/2024 07:55:44 PM
 // Design Name: 
@@ -40,7 +40,7 @@ module tb_top_level;
         .C1(C1)
     );
 
-    // Gera o clock
+     // Gera o clock
     initial begin
         clk = 0;
         forever #5 clk = ~clk;  // Clock com período de 10 ns
@@ -52,8 +52,6 @@ module tb_top_level;
         reset = 1; REQ = 0; RW = 0;
         #20 reset = 0;  // Sai do reset
         #20;
-
-        // Aplicação dos estímulos fornecidos
 
         // Q = 1; REQ = 0; RW = 0;
         REQ = 0; RW = 0;
@@ -139,9 +137,5 @@ module tb_top_level;
         $stop;
     end
 
-    // Monitoramento
-    initial begin
-        $monitor("Time: %0t | Reset=%b | REQ=%b | RW=%b | DOUT=%b | DA=%b | WE=%b | WC=%b | C0=%b | C1=%b",
-                 $time, reset, REQ, RW, DOUT, DA, WE, WC, C0, C1);
-    end
+
 endmodule

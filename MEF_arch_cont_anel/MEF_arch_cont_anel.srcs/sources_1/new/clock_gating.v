@@ -19,9 +19,9 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
 module clock_gating_control (
     input wire clk,            // Clock de entrada
+    input wire reset,          // Sinal de reset ativo em nível alto
     input wire [4:1] Q,        // Entrada Q (4 bits) do decodificador
     input wire [1:0] E,        // Entrada E (2 bits) da máquina de estados
     input wire CL,             // Entrada feedback clear do contador em anel
@@ -33,18 +33,22 @@ module clock_gating_control (
 
     // Lógica combinacional para determinar o estado do enable
     always @(*) begin
-        if ((Q == 4'b0110 && E == 2'b01 && CL == 1) || (Q == 4'b0101 && E == 2'b01 && CL == 1) || (Q == 4'b1000 && E == 2'b10 && CL == 1))  begin
-               // if ((Q == 4'b0101 && E == 2'b01) || (Q == 4'b1000 && E == 2'b10) || (Q == 4'b0110 && E == 2'b01) || (Q == 4'b1110 && E == 2'b01)) begin
-
+        if ((Q == 4'b0110 && E == 2'b01 && CL == 1) || 
+            (Q == 4'b0101 && E == 2'b01 && CL == 1) || 
+            (Q == 4'b1000 && E == 2'b10 && CL == 1)) begin
             enable = 0; // Desativa o clock
         end else begin
             enable = 1; // Ativa o clock
         end
     end
 
-    // Sincroniza o enable com o clock
-    always @(posedge clk) begin
-        enable_sync <= enable;
+    // Sincroniza o enable com o clock e implementa o reset
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            enable_sync <= 1'b1; // Estado inicial seguro no reset
+        end else begin
+            enable_sync <= enable;
+        end
     end
 
     // Porta AND para condicionar o clock
